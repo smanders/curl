@@ -41,9 +41,9 @@
 cmake_minimum_required(VERSION 2.6.2 FATAL_ERROR)
 set(CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/CMake;${CMAKE_MODULE_PATH}")
 include(Utilities)
-include(flags OPTIONAL)
 
 project( CURL C )
+include(flags OPTIONAL)
 
 message(WARNING "the curl cmake build system is poorly maintained. Be aware")
 
