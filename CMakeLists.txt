@@ -869,6 +869,7 @@ endfunction()
 
 add_subdirectory(lib)
 if(BUILD_CURL_EXE)
+  add_definitions(-DUSE_MANUAL)
   add_subdirectory(src)
 endif()
 if(BUILD_CURL_TESTS)
