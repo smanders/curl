@@ -44,6 +44,7 @@ include(Utilities)
 include(Macros)
 
 project( CURL C )
+include(flags OPTIONAL)
 
 message(WARNING "the curl cmake build system is poorly maintained. Be aware")
 

@@ -119,4 +119,4 @@ if(WIN32)
   endif()
 endif()
 
-install(TARGETS ${LIB_NAME} DESTINATION lib)
+install(TARGETS ${LIB_NAME} DESTINATION lib${NUMBITS})
