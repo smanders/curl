@@ -248,7 +248,7 @@ check_library_exists("${CURL_LIBS}" dlopen "" HAVE_DLOPEN)
 set(CMAKE_REQUIRED_LIBRARIES ${CURL_LIBS})
 
 option(CURL_ZLIB "Set to ON to enable building cURL with zlib support." ON)
-option(CURL_ZLIB_MODULE_PATH "Find zlib in CMAKE_MODULE_PATH." ON)
+option(CURL_ZLIB_MODULE_PATH "Find zlib in CMAKE_MODULE_PATH." OFF)
 mark_as_advanced(CURL_ZLIB_MODULE_PATH)
 set(HAVE_LIBZ OFF)
 set(HAVE_ZLIB_H OFF)
@@ -271,7 +271,7 @@ endif()
 
 option(CMAKE_USE_OPENSSL "Use OpenSSL code. Experimental" ON)
 mark_as_advanced(CMAKE_USE_OPENSSL)
-option(CMAKE_USE_OPENSSL_MODULE_PATH "Find OpenSSL in CMAKE_MODULE_PATH." ON)
+option(CMAKE_USE_OPENSSL_MODULE_PATH "Find OpenSSL in CMAKE_MODULE_PATH." OFF)
 mark_as_advanced(CMAKE_USE_OPENSSL_MODULE_PATH)
 if(CMAKE_USE_OPENSSL)
 
