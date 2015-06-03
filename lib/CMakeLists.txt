@@ -99,7 +99,7 @@ if(WIN32)
 endif()
 
 install(TARGETS ${LIB_NAME} EXPORT libcurl-targets
-  ARCHIVE DESTINATION lib${NUMBITS}
-  LIBRARY DESTINATION lib${NUMBITS}
-  RUNTIME DESTINATION bin${NUMBITS})
-install(EXPORT libcurl-targets DESTINATION lib${NUMBITS}/cmake)
+  ARCHIVE DESTINATION lib
+  LIBRARY DESTINATION lib
+  RUNTIME DESTINATION bin)
+install(EXPORT libcurl-targets DESTINATION lib/cmake)
