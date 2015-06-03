@@ -75,4 +75,5 @@ set_target_properties(${EXE_NAME} PROPERTIES
 
 #INCLUDE(ModuleInstall OPTIONAL)
 
-install(TARGETS ${EXE_NAME} DESTINATION bin)
+install(TARGETS ${EXE_NAME} EXPORT curl-targets DESTINATION bin${NUMBITS})
+install(EXPORT curl-targets DESTINATION bin${NUMBITS}/cmake)
