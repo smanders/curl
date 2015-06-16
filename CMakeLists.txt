@@ -444,7 +444,10 @@ if(NOT CURL_DISABLE_LDAPS)
 endif()
 
 # Check for idn
-check_library_exists_concat("idn" idna_to_ascii_lz HAVE_LIBIDN)
+option(ENABLE_LIBIDN "Set to ON to enable libidn support" ON)
+if(ENABLE_LIBIDN)
+  check_library_exists_concat("idn" idna_to_ascii_lz HAVE_LIBIDN)
+endif()
 
 # Check for symbol dlopen (same as HAVE_LIBDL)
 check_library_exists("${CURL_LIBS}" dlopen "" HAVE_DLOPEN)
