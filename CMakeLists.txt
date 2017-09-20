@@ -1044,6 +1044,14 @@ function(TRANSFORM_MAKEFILE_INC INPUT_FILE OUTPUT_FILE)
 
 endfunction()
 
+if(NOT DEFINED CURL_VER)
+  set(CURL_VER ${CURL_VERSION})
+elseif(NOT ${CURL_VER} STREQUAL ${CURL_VERSION})
+  message(AUTHOR_WARNING "version passed in (${CURL_VER}) doesn't match internal version (${CURL_VERSION})")
+endif()
+set(ver _${CURL_VER})
+set(verDir /curl${ver})
+
 add_subdirectory(lib)
 if(BUILD_CURL_EXE)
   add_subdirectory(src)
@@ -1193,10 +1201,10 @@ endif()
 # Installation.
 # First, install generated curlbuild.h
 install(FILES "${CMAKE_CURRENT_BINARY_DIR}/include/curl/curlbuild.h"
-    DESTINATION include/curl )
+    DESTINATION include${verDir}/curl )
 # Next, install other headers excluding curlbuild.h
 install(DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/include/curl"
-    DESTINATION include
+    DESTINATION include${verDir}
     FILES_MATCHING PATTERN "*.h"
     PATTERN "curlbuild.h" EXCLUDE)
 

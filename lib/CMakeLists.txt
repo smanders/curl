@@ -98,8 +98,11 @@ if(WIN32)
   endif()
 endif()
 
-install(TARGETS ${LIB_NAME} EXPORT libcurl-targets
+set_target_properties(${LIB_NAME} PROPERTIES OUTPUT_NAME ${LIB_NAME}${ver})
+set(targetsFile ${LIB_NAME}${ver}-targets)
+
+install(TARGETS ${LIB_NAME} EXPORT ${targetsFile}
   ARCHIVE DESTINATION lib
   LIBRARY DESTINATION lib
   RUNTIME DESTINATION bin)
-install(EXPORT libcurl-targets DESTINATION lib/cmake)
+install(EXPORT ${targetsFile} DESTINATION lib/cmake)
