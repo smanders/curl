@@ -1163,21 +1163,27 @@ set(REQUIRE_LIB_DEPS        "no")
 # SUPPORT_PROTOCOLS
 set(VERSIONNUM              "${CURL_VERSION_NUM}")
 
+option(INSTALL_CURL_CONFIG "Set to ON to install cURL config (curl-config and pkg-config libcurl.pc)." ON)
+
 # Finally generate a "curl-config" matching this config
 configure_file("${CURL_SOURCE_DIR}/curl-config.in"
                "${CURL_BINARY_DIR}/curl-config" @ONLY)
+if(INSTALL_CURL_CONFIG)
 install(FILES "${CMAKE_BINARY_DIR}/curl-config"
         DESTINATION bin
         PERMISSIONS
           OWNER_READ OWNER_WRITE OWNER_EXECUTE
           GROUP_READ GROUP_EXECUTE
           WORLD_READ WORLD_EXECUTE)
+endif()
 
 # Finally generate a pkg-config file matching this config
 configure_file("${CURL_SOURCE_DIR}/libcurl.pc.in"
                "${CURL_BINARY_DIR}/libcurl.pc" @ONLY)
+if(INSTALL_CURL_CONFIG)
 install(FILES "${CMAKE_BINARY_DIR}/libcurl.pc"
         DESTINATION lib/pkgconfig)
+endif()
 
 # This needs to be run very last so other parts of the scripts can take advantage of this.
 if(NOT CURL_CONFIG_HAS_BEEN_RUN_BEFORE)
