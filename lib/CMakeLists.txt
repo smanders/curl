@@ -97,6 +97,9 @@ endif()
 set_target_properties(${LIB_NAME} PROPERTIES PREFIX "")
 set_target_properties(${LIB_NAME} PROPERTIES IMPORT_PREFIX "")
 
+# embed version number in the library filename, if {_ver} defined
+set_target_properties(${LIB_NAME} PROPERTIES OUTPUT_NAME ${LIB_NAME}${_ver})
+
 if(WIN32)
   if(BUILD_SHARED_LIBS)
     # Add "_imp" as a suffix before the extension to avoid conflicting with the statically linked "libcurl.lib"
