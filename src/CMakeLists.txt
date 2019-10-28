@@ -71,11 +71,13 @@ target_link_libraries( ${EXE_NAME} libcurl ${CURL_LIBS})
 
 # Add the postfix to the executable since it is not added automatically as for modules and shared libraries
 set_target_properties(${EXE_NAME} PROPERTIES
-  OUTPUT_NAME ${EXE_NAME}${ver}
+  OUTPUT_NAME ${EXE_NAME}${_ver}
   DEBUG_POSTFIX "${CMAKE_DEBUG_POSTFIX}")
 
 #INCLUDE(ModuleInstall OPTIONAL)
 
-set(targetsFile ${EXE_NAME}${ver}-targets)
-install(TARGETS ${EXE_NAME} EXPORT ${targetsFile} DESTINATION bin CONFIGURATIONS Release)
-install(EXPORT ${targetsFile} DESTINATION bin/cmake CONFIGURATIONS Release)
+install(TARGETS ${EXE_NAME} EXPORT ${TARGETS_EXPORT_NAME} DESTINATION ${CMAKE_INSTALL_BINDIR} CONFIGURATIONS Release)
+install(EXPORT ${TARGETS_EXPORT_NAME}
+  NAMESPACE "${PROJECT_NAME}::"
+  DESTINATION ${CURL_INSTALL_CMAKE_DIR}
+  CONFIGURATIONS Release)

@@ -1047,11 +1047,18 @@ endfunction()
 
 if(NOT DEFINED CURL_VER)
   set(CURL_VER ${CURL_VERSION})
-elseif(NOT ${CURL_VER} STREQUAL ${CURL_VERSION})
+elseif(NOT CURL_VER STREQUAL CURL_VERSION)
   message(AUTHOR_WARNING "version passed in (${CURL_VER}) doesn't match internal version (${CURL_VERSION})")
 endif()
-set(ver _${CURL_VER})
-set(verDir /curl${ver})
+if(XP_INSTALL_DIRS)
+  set(_ver _${CURL_VER})
+  set(CMAKE_INSTALL_INCLUDEDIR include/curl${_ver})
+endif()
+
+include(GNUInstallDirs)
+
+set(CURL_INSTALL_CMAKE_DIR ${CMAKE_INSTALL_LIBDIR}/cmake/${PROJECT_NAME}${_ver})
+set(TARGETS_EXPORT_NAME "${PROJECT_NAME}Targets")
 
 add_subdirectory(lib)
 if(BUILD_CURL_EXE)
@@ -1179,7 +1186,7 @@ configure_file("${CURL_SOURCE_DIR}/curl-config.in"
                "${CURL_BINARY_DIR}/curl-config" @ONLY)
 if(INSTALL_CURL_CONFIG)
 install(FILES "${CMAKE_BINARY_DIR}/curl-config"
-        DESTINATION bin
+        DESTINATION ${CMAKE_INSTALL_BINDIR}
         PERMISSIONS
           OWNER_READ OWNER_WRITE OWNER_EXECUTE
           GROUP_READ GROUP_EXECUTE
@@ -1191,7 +1198,7 @@ configure_file("${CURL_SOURCE_DIR}/libcurl.pc.in"
                "${CURL_BINARY_DIR}/libcurl.pc" @ONLY)
 if(INSTALL_CURL_CONFIG)
 install(FILES "${CMAKE_BINARY_DIR}/libcurl.pc"
-        DESTINATION lib/pkgconfig)
+        DESTINATION ${CMAKE_INSTALL_LIBDIR}/pkgconfig)
 endif()
 
 # This needs to be run very last so other parts of the scripts can take advantage of this.
@@ -1202,10 +1209,10 @@ endif()
 # Installation.
 # First, install generated curlbuild.h
 install(FILES "${CMAKE_CURRENT_BINARY_DIR}/include/curl/curlbuild.h"
-    DESTINATION include${verDir}/curl )
+    DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/curl )
 # Next, install other headers excluding curlbuild.h
 install(DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/include/curl"
-    DESTINATION include${verDir}
+    DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}
     FILES_MATCHING PATTERN "*.h"
     PATTERN "curlbuild.h" EXCLUDE)
 
