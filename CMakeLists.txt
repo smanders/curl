@@ -367,8 +367,8 @@ if(CMAKE_USE_OPENSSL)
   # version of CMake.  This allows our dependents to get our dependencies
   # transitively.
   if(NOT CMAKE_VERSION VERSION_LESS 3.4)
-    if(TARGET externpro::ssl AND TARGET externpro::crypto)
-      list(APPEND CURL_LIBS externpro::ssl externpro::crypto)
+    if(TARGET xpro::ssl AND TARGET xpro::crypto)
+      list(APPEND CURL_LIBS xpro::ssl xpro::crypto)
     elseif(TARGET OpenSSL::SSL AND TARGET OpenSSL::Crypto)
       list(APPEND CURL_LIBS OpenSSL::SSL OpenSSL::Crypto)
     else()
