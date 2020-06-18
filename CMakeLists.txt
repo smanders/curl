@@ -546,9 +546,8 @@ if(CURL_ZLIB)
     # version of CMake.  This allows our dependents to get our dependencies
     # transitively.
     if(NOT CMAKE_VERSION VERSION_LESS 3.4)
-      if(TARGET zlibstatic)
-        list(APPEND CURL_LIBS zlibstatic)
-        include_directories(${ZLIB_INCLUDE_DIRS})
+      if(TARGET xpro::zlibstatic)
+        list(APPEND CURL_LIBS xpro::zlibstatic)
       elseif(TARGET ZLIB::ZLIB)
         list(APPEND CURL_LIBS ZLIB::ZLIB)
       else()
