@@ -1202,6 +1202,11 @@ if(XP_INSTALL_DIRS)
   set(_ver _${CURL_VER})
   set(CMAKE_INSTALL_INCLUDEDIR include/curl${_ver})
 endif()
+if(DEFINED XP_NAMESPACE)
+  set(nameSpace ${XP_NAMESPACE}::)
+else()
+  set(nameSpace ${PROJECT_NAME}::)
+endif()
 
 include(GNUInstallDirs)
 
@@ -1395,7 +1400,7 @@ configure_package_config_file(CMake/curl-config.cmake.in
 
 install(
         EXPORT "${TARGETS_EXPORT_NAME}"
-        NAMESPACE "${PROJECT_NAME}::"
+        NAMESPACE "${nameSpace}"
         DESTINATION ${CURL_INSTALL_CMAKE_DIR}
 )
 
